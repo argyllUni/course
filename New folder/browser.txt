@@ -1,0 +1,39 @@
+xhttps://wiki.haskell.org/Vim
+https://github.com/bitc/vim-hdevtools
+http://vim.1045645.n5.nabble.com/location-of-vim-directory-on-window-td1183791.html
+referentially transparent
+https://wiki.haskell.org/Referential_transparency
+https://en.wikipedia.org/wiki/Referential_transparency
+https://www.ubuntu.com/download/desktop/thank-you?country=AU&version=16.04.1&architecture=amd64
+https://www.virtualbox.org/wiki/Downloads
+http://pointfree.io/
+https://en.wikibooks.org/wiki/Haskell/Control_structures
+https://en.wikipedia.org/wiki/JADE_(programming_language)
+haskell job
+https://wiki.haskell.org/Jobs
+https://www.vacationlabs.com/haskell-internship/
+https://www.open.edu.au/student-admin-and-support/key-dates/
+http://www.functionaljava.org/
+https://www.haskell.org/hoogle/
+https://ghc.haskell.org/trac/ghc/wiki/OverloadedLists
+http://dev.stephendiehl.com/hask/
+halting problem
+https://en.wikipedia.org/wiki/Halting_problem
+can we be liberated from von neumann
+Can programming be liberated from the von Neumann style?
+http://learnyouahaskell.com/chapters
+http://www.staff.city.ac.uk/~ross/papers/Applicative.html
+https://en.wikipedia.org/wiki/B,_C,_K,_W_system
+https://en.wikipedia.org/wiki/SKI_combinator_calculus
+SK is turing complete
+https://en.wikipedia.org/wiki/Unlambda
+runar dependency injection
+Dead-Simple Dependency Injection - YouTube
+Video for runar dependency injection? 27:04
+https://www.youtube.com/watch?v=ZasXwtTRkio
+flatmap that shit
+university of pensylvania
+cis194
+http://cis.upenn.edu/~cis194/fall16/
+http://www.seas.upenn.edu/~cis194/fall16/
+
