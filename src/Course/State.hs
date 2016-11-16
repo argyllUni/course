@@ -223,7 +223,7 @@ sumsquares =
 -- >>> isHappy 44
 -- True
 isHappy ::
-  Integer
+  Int
   -> Bool
 isHappy =
     -- take 10 $ prodouce sumsquares

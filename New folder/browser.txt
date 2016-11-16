@@ -67,3 +67,5 @@ haskell longest name
 http://stackoverflow.com/questions/21717646/longest-common-prefix-in-haskell
 https://www.reddit.com/r/haskell/comments/178jwh/the_longest_type_signature_i_have_ever_seen/
 http://i.imgur.com/Zv9JH9A.png
+https://github.com/camford/hangman-cheating-elm
+
