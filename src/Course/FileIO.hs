@@ -165,3 +165,13 @@ printFile f c =
 --  readFile :: Chars -> IO Chars
 --  lines :: Chars -> List Char
 --  joshua-morris @ GH
+--
+--  monads
+--      anything with bind and return
+--      reduces code duplication
+--
+--  lenses
+--  Transducer is lense without good stuff
+--  https://www.reddit.com/r/haskell/comments/2cv6l4/clojures_transducers_are_perverse_lenses/
+--  https://en.wikipedia.org/wiki/Finite-state_transducer
+--

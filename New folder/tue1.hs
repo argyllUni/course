@@ -55,6 +55,7 @@ add2StringReader a b =
     bindStringReader b (\bb ->
     pointStringReader (aa + bb)))
 
+-- monad
 class Moon k where
     -- flatMap, (>>=)
     bind :: k a -> (a -> k b) -> k b

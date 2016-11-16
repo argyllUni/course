@@ -36,4 +36,31 @@ university of pensylvania
 cis194
 http://cis.upenn.edu/~cis194/fall16/
 http://www.seas.upenn.edu/~cis194/fall16/
+the essence of the iterator pattern
+https://hackage.haskell.org/package/base-4.9.0.0/docs/Data-Traversable.html
+spring framework api
+http://docs.spring.io/spring/docs/current/javadoc-api/
+manuel chakravarty unsw
+    http://www.cse.unsw.edu.au/~chak/
+    https://www.cse.unsw.edu.au/~chak/papers/CKLM+11.html
+    https://www.cse.unsw.edu.au/~chak/papers/
+data61 nicta
+https://www.data61.csiro.au/
+http://www.innovation.gov.au/page/data61-australias-digital-and-data-innovation-group
+http://www.innovation.gov.au/page/data61-australias-digital-and-data-innovation-group
+http://www.csiro.au/en/News/News-releases/2015/CSIRO-NICTA-join-forces
+https://en.wikipedia.org/wiki/NICTA
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/ghci.html
+https://wiki.haskell.org/State_Monad
+ghc What exactly is kind
+http://stackoverflow.com/questions/27095011/what-exactly-is-the-kind-in-haskell
+https://downloads.haskell.org/~ghc/7.8.4/docs/html/users_guide/kind-polymorphism.html
+https://ghc.haskell.org/trac/ghc/wiki/ImpredicativePolymorphism
+https://ghc.haskell.org/trac/ghc/wiki/ReportABug
+https://ghc.haskell.org/trac/ghc/wiki/PartialTypeSignatures
+https://ocharles.org.uk/blog/guest-posts/2014-12-18-rank-n-types.html
+http://ponies.io/posts/2014-07-30-typelits.html
+https://typesandkinds.wordpress.com/2013/08/15/roles-a-new-feature-of-ghc/
+https://typesandkinds.wordpress.com/
+https://www.schoolofhaskell.com/user/thomasw/new-in-ghc-7-10-partial-type-signatures
 

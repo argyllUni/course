@@ -34,13 +34,25 @@ newtype State s a =
 -- | Implement the `Functor` instance for `State s`.
 -- >>> runState ((+1) <$> pure 0) 0
 -- (1,0)
+-- >>> runState ((+1) <$> State (\s -> (9, s * 2))) 3
+-- (10,6)
 instance Functor (State s) where
   (<$>) ::
     (a -> b)
     -> State s a
     -> State s b
-  (<$>) =
-      error "todo: Course.State#(<$>)"
+--  (<$>) f s a =
+--    f s :. map f a
+  --(<$>) f i = undefined i
+  (<$>) = \f -> \st -> State (\s -> let (a, t) = runState st s in (f a, t))
+
+--map ::
+--  (a -> b)
+--  -> List a
+--  -> List b
+--map _ Nil = Nil
+--map f (h:.t) =
+--  f h :. map f t
 
 -- | Implement the `Applicative` instance for `State s`.
 --
@@ -57,14 +69,17 @@ instance Applicative (State s) where
   pure ::
     a
     -> State s a
-  pure =
-    error "todo: Course.State pure#instance (State s)"
+  pure = State . (,)
+    -- \a -> State (\s -> (a, s))
   (<*>) ::
     State s (a -> b)
     -> State s a
     -> State s b 
-  (<*>) =
-    error "todo: Course.State (<*>)#instance (State s)"
+  State f <*> State a =
+    State (\s -> let (g, t) = f s
+                     (h, u) = a t
+                 in  (g h, u)
+    )
 
 -- | Implement the `Bind` instance for `State s`.
 --
@@ -78,8 +93,10 @@ instance Monad (State s) where
     (a -> State s b)
     -> State s a
     -> State s b
-  (=<<) =
-    error "todo: Course.State (=<<)#instance (State s)"
+  f =<< State k =
+    State (\s -> let (a, t) = k s
+                 in  runState (f a) t
+    )
 
 -- | Run the `State` seeded with `s` and retrieve the resulting state.
 --
@@ -88,8 +105,8 @@ exec ::
   State s a
   -> s
   -> s
-exec =
-  error "todo: Course.State#exec"
+exec (State k) =
+    snd . k
 
 -- | Run the `State` seeded with `s` and retrieve the resulting value.
 --
@@ -98,8 +115,8 @@ eval ::
   State s a
   -> s
   -> a
-eval =
-  error "todo: Course.State#eval"
+eval (State k) =
+    fst . k
 
 -- | A `State` where the state also distributes into the produced value.
 --
@@ -108,7 +125,7 @@ eval =
 get ::
   State s s
 get =
-  error "todo: Course.State#get"
+    State (join (,))
 
 -- | A `State` where the resulting state is seeded with the given value.
 --
@@ -118,7 +135,7 @@ put ::
   s
   -> State s ()
 put =
-  error "todo: Course.State#put"
+    State . const . (,) ()
 
 -- | Find the first element in a `List` that satisfies a given predicate.
 -- It is possible that no element is found, hence an `Optional` result.
@@ -139,8 +156,9 @@ findM ::
   (a -> f Bool)
   -> List a
   -> f (Optional a)
-findM =
-  error "todo: Course.State#findM"
+findM p =
+    foldRight (\a b ->
+        p a >>= bool b (pure (Full a))) (pure Empty)
 
 -- | Find the first element in a `List` that repeats.
 -- It is possible that no element repeats, hence an `Optional` result.
@@ -153,8 +171,8 @@ firstRepeat ::
   Ord a =>
   List a
   -> Optional a
-firstRepeat =
-  error "todo: Course.State#firstRepeat"
+firstRepeat list =
+    (eval (findM (\a -> State (lift2 (,) (S.member a) (S.insert a))) list) S.empty)
 
 -- | Remove all duplicate elements in a `List`.
 -- /Tip:/ Use `filtering` and `State` with a @Data.Set#Set@.
@@ -166,8 +184,22 @@ distinct ::
   Ord a =>
   List a
   -> List a
-distinct =
-  error "todo: Course.State#distinct"
+distinct list =
+    eval (filtering (\a -> State (\s -> lift2 (,) (S.notMember a) (S.insert a) s)) list) S.empty
+
+sumdigits ::
+    (Int -> Int)
+    -> Int
+    -> Int
+sumdigits f d =
+    let (x, y) = divMod d 10
+    in  f y + bool (sumdigits f x) 0 (x==0)
+
+sumsquares ::
+    Int
+    -> Int
+sumsquares =
+    sumdigits (join (*))
 
 -- | A happy number is a positive integer, where the sum of the square of its digits eventually reaches 1 after repetition.
 -- In contrast, a sad number (not a happy number) is where the sum of the square of its digits never reaches 1
@@ -194,4 +226,10 @@ isHappy ::
   Integer
   -> Bool
 isHappy =
-  error "todo: Course.State#isHappy"
+    -- take 10 $ prodouce sumsquares
+    contains 1 . firstRepeat . produce sumsquares
+    --contains 1 . find (lift2 (||) (==4) (==1)) . produce sumsquares
+    --contains 1 . find (`elem` (1:.4:.Nil)) . produce sumsquares
+-- #haskell.au @ freenode
+-- @hoogle (a->b) ->a ->b
+-- @pl (a->b) ->a ->b
