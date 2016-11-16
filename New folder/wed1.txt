@@ -1,0 +1,22 @@
+functor
+(a -> b) -> f     a  -> f     b
+(a -> b) -> List  a  -> List  b
+(a -> b) -> Opti  a  -> Opti  b
+(a -> b) -> (t -> a) -> (t -> b)
+
+applicative
+f (a -> b)     -> f    a -> f     b
+List (a -> b) -> List a -> List b
+Opti (a -> b) -> Opti a -> Opti b
+(t -> a -> b) -> (t -> a) -> (t -> b)
+
+monad
+(a -> f b) -> f a -> f b
+(a -> List b) -> List a -> List b
+(a -> Opti b) -> Opti a -> Opti b
+(a -> Pars b) -> Pars a -> Pars b
+(a -> t -> b) -> (t -> a) -> (t -> b)
+(a -> t -> (t, b)) -> (t -> (t,a)) -> (t -> (t, b))
+
+comonad
+(f a -> b) -> f a -> f b

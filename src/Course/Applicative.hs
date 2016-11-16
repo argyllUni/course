@@ -348,8 +348,9 @@ sequence ::
   Applicative f =>
   List (f a)
   -> f (List a)
-sequence =
-  error "todo: Course.Applicative#sequence"
+sequence Nil = pure Nil
+sequence (h:.t) =
+    lift2 (:.) h (sequence t)
 
 -- | Replicate an effect a given number of times.
 --

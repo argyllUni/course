@@ -74,7 +74,11 @@ the contents of c
 main ::
   IO ()
 main =
-  error "todo: Course.FileIO#main"
+    do
+        a <- getArgs
+        case a of
+            x:._ -> run x
+            _ -> putStrLn "please pass an argument"
 
 type FilePath =
   Chars
@@ -83,31 +87,81 @@ type FilePath =
 run ::
   Chars
   -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+run name =
+--    printFiles (undefined)
+    --printFiles (getFiles (lines (readFile name)))
+    readFile name >>= \r ->
+    getFiles (lines r) >>= \s ->
+    printFiles s
+    {-
+    do
+        r <- readFile name
+        s <- getFiles (lines r)
+        printFiles s
+    -}
+
 
 getFiles ::
   List FilePath
   -> IO (List (FilePath, Chars))
-getFiles =
-  error "todo: Course.FileIO#getFiles"
+getFiles f =
+    sequence (getFile <$> f)
 
 getFile ::
   FilePath
   -> IO (FilePath, Chars)
 getFile =
-  error "todo: Course.FileIO#getFile"
+    lift2 (<$>) (,) readFile
+    -- \f -> (<$>) ((,) f) (readFile f)
+    --(\c -> (f, c)) <$> readFile f
+    {-do
+        c <- readFile f
+        return (f, c)-}
+    --readFile <$> undefined
 
 printFiles ::
   List (FilePath, Chars)
   -> IO ()
 printFiles =
-  error "todo: Course.FileIO#printFiles"
+    -- \list -> void (sequence ((<$>) (uncurry printFile) list))
+    -- \x -> f (g (h x))
+    -- \x -> (f . g . h) x
+    -- f . g . x
+    void . sequence . (<$>) (uncurry printFile)
+{-
+printFiles list =
+    --void (sequence ((\(n, c) -> printFile n c) <$> list))
+    void (sequence (uncurry printFile <$> list))
+-}
+{-
+printFiles Nil = pure ()
+--printFiles (h:.t) =
+    --printFiles t >> printFile (fst h) (snd h)
+printFiles ((n, c):.t) =
+    printFile n c *> printFiles t
+printFiles =
+    foldRight (\(n, c) t -> printFile n c *> t) (pure ())
+-}
 
 printFile ::
   FilePath
   -> Chars
   -> IO ()
-printFile =
-  error "todo: Course.FileIO#printFile"
+printFile f c =
+--    putStrLn c
+    --putStrLn ("============" ++ f) >>= \_ -> putStrLn c
+    -- \_ -> putStrLn c =<< putStrLn ("============" ++ f)
+    --putStrLn ("============" ++ f) <* putStrLn c
+    --putStrLn ("============" ++ f) *> putStrLn c
+    putStrLn ("============" ++ f) >> putStrLn c
+    --putStrLn ("============" ++ f >> c)
+    --putStrLn ("============" ++ f ++ c)
+    {- do
+        putStrln (f)
+        putStrln c
+    -}
 
+--  putStrLn :: Chars -> IO ()
+--  readFile :: Chars -> IO Chars
+--  lines :: Chars -> List Char
+--  joshua-morris @ GH

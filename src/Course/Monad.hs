@@ -118,8 +118,15 @@ instance Monad ((->) t) where
     (a -> ((->) t b))
     -> ((->) t a)
     -> ((->) t b)
-  (=<<) =
-    error "todo: Course.Monad (=<<)#instance ((->) t)"
+  (=<<) f p t =
+  -- Lambda notation
+--  (=<<) =
+    -- (a -> t -> b) -> (t -> a) -> t -> b
+    -- (t -> a) -> t -> b
+    -- t -> b
+--    \f -> \p -> \t -> f (p t) 
+--    \f p t -> f (p t) t
+    f (p t) t
 
 -- | Flattens a combined structure to a single structure.
 --
